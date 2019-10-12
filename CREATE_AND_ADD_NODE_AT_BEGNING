@@ -1,0 +1,43 @@
+//code to add node at begning and print it;
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+	int no;
+	struct Node *next;
+};
+struct Node *ptr=NULL;
+int main()
+{
+	struct Node *start=NULL,*temp;
+	while(1)
+	{
+		int i;
+		printf("Enter 1 if u want to enter element or 0\n");
+		scanf("%d",&i);
+		if(i==0)
+			break;
+		temp=(struct Node*)malloc(sizeof(struct Node));
+		scanf("%d",&temp->no);
+		temp->next=NULL;
+		if(start==NULL)
+		{
+			start=temp;
+			ptr=temp;//we can do it without using or taking ptr if we want to add at begining.
+		}
+		else
+		{
+			temp->next=start;
+			start=temp;
+		}
+	}
+	struct Node *ptr1=start;
+	while(ptr1!=NULL)
+	{
+		printf("%d\n",ptr1->no);
+		ptr1=ptr1->next;
+	}
+	free(ptr1);
+	free(temp);
+	return 0;
+}
