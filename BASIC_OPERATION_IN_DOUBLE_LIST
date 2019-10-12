@@ -1,0 +1,109 @@
+//code to create ,add and delete 2 way link list
+#include<stdio.h>
+struct node
+{
+    int d;
+    struct node *back;
+    struct node *forw;
+};
+void insertatbegin(int );
+void insertatend(int );
+void insertatgivenpos(int ,int);
+void print();
+int c;
+struct node *start=NULL;
+int main()
+{
+    for(int n=0;n<10;n++)
+    {
+        printf("ENTER 1 IF YOU WANT TO INSERT AN NODE .\n");
+        printf("ENTER 2 IF YOU WANT TO INSERT A NODE AT END.\n");
+        printf("ENTER 3 IF YOU WANT TO INSERT A NODE AT GIVEN POSITION.\n");
+        printf("ENTER 4 TO PRINT THE LIST..\n");
+        int i;
+        scanf("%d",&i);
+        if(i==1)
+        {
+            int ele;
+            scanf("%d",&ele);
+            insertatbegin(ele);
+        }
+        else if(i==2)
+        {
+            int ele;
+            scanf("%d",&ele);
+            insertatend(ele);
+        }
+        else if(i==3)
+        {
+            int ele;
+            int pos;
+            scanf("%d",&ele);
+             scanf("%d",&pos);
+            insertatgivenpos(ele,pos);
+        }
+        else if(i==4)
+        {
+            print();
+        }
+    }
+}
+void insertatbegin(int ele)
+{
+    c++;
+    struct node *t;
+    t=(struct node*)malloc(sizeof(struct node));
+    t->d=ele;
+    t->forw=start;
+    t->back=NULL;
+    if(start!=NULL)
+        start->back=t;
+    start=t;
+}
+void insertatend(int ele)
+{
+    c++;
+    struct node *t,*l=start;
+    t=(struct node*)malloc(sizeof(struct node));
+    t->d=ele;
+    t->forw=NULL;
+    if(start==NULL)
+    {
+        t->back=NULL;
+        start=t;
+        return;
+    }
+    while(l->forw!=NULL)
+    {
+        l=l->forw;
+    }
+    l->forw=t;
+    t->back=l;
+    return;
+}
+void insertatgivenpos(int ele,int pos)
+{
+    c++;
+    struct node *t;
+    t=(struct node*)malloc(sizeof(struct node));
+    t->d=ele;
+    struct node *last=start;
+    while(last->forw!=NULL && last->d!=pos)
+        last=last->forw;
+    t->back=last;
+    t->forw=last->forw;
+    last->forw=t;
+    (t->forw)->back=t;
+    return;
+}
+void print()
+{
+    struct node *t;
+    t=start;
+    printf("NUMBER OF ELEMENTS IN THE LIST = %d\n",c);
+    while(t!=NULL)
+    {
+        printf("%d\n",t->d);
+        t=t->forw;
+    }
+}
