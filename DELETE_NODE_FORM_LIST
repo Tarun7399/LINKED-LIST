@@ -1,0 +1,69 @@
+//code to delete nodes and print it;
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+	int no;
+	struct Node *next;
+};
+struct Node *ptr=NULL;
+int main()
+{
+	struct Node *start=NULL,*temp;
+	while(1)
+	{
+		int i;
+		printf("Enter 1 if u want to enter element.\n2 for delete element.\n0 to exit");
+		scanf("%d",&i);
+		if(i==0)
+			break;
+		else if(i==2)
+		{
+			printf("Plz enter the element you want to delete.");
+			int m;
+			scanf("%d",&m);
+			if(start==NULL)
+				printf("There are no element to delete.\n");
+			else
+			{
+				struct Node *ptr1=start;
+				struct Node *save=NULL;
+				while(ptr1!=NULL)
+				{
+					if(ptr1->no==m)
+					{	save->next=ptr1->next;
+						ptr1->next=NULL;
+						ptr1=save;
+					}
+					save=ptr1;
+					ptr1=ptr1->next;
+				}
+			}
+		}
+		else
+		{
+			temp=(struct Node*)malloc(sizeof(struct Node));
+			scanf("%d",&temp->no);
+			temp->next=NULL;
+			if(start==NULL)
+			{
+				start=temp;
+				ptr=temp;
+			}
+			else
+			{
+				ptr->next=start;
+				ptr=temp;
+			}
+		}
+	}
+	struct Node *ptr1=start;
+	while(ptr1!=NULL)
+	{
+		printf("%d\n",ptr1->no);
+		ptr1=ptr1->next;
+	}
+	free(ptr1);
+	free(temp);
+	return 0;
+}
